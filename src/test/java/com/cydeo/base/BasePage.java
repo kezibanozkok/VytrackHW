@@ -12,6 +12,7 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
 public abstract class BasePage {
+
     @FindBy(css = "div[class='loader-mask shown']")
     @CacheLookup
     protected WebElement loaderMask;
@@ -88,6 +89,7 @@ public abstract class BasePage {
      * @param module
      */
     public void navigateToModule(String tab, String module) {
+
         String tabLocator = "//span[normalize-space()='" + tab + "' and contains(@class, 'title title-level-1')]";
         //     String moduleLocator2 = "//span[@class='title title-level-1' and contains(text(),'"+ module + "')]";
 
