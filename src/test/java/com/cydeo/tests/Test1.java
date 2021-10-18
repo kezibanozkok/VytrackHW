@@ -4,12 +4,8 @@ import com.cydeo.base.TestBase;
 import com.cydeo.pages.CalendarEventsPage;
 import com.cydeo.pages.DashboardPage;
 import com.cydeo.pages.LoginPage;
-import com.sun.xml.internal.ws.api.server.AbstractServerAsyncTransport;
-import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
-
-import java.util.Calendar;
 
 public class Test1 extends TestBase {
 
@@ -28,5 +24,14 @@ public class Test1 extends TestBase {
 
     }
 
+    @Test
+    public void test2() {
+        loginPage.loginAsStoreManager();
 
+        dashboardPage.navigateToModule("Activities", "Calendar Events");
+
+        String pageValue = calendarEventsPage.pageNumber.getAttribute("value");
+
+        Assert.assertEquals(pageValue, "1", "verify page number equals to 1");
+    }
 }

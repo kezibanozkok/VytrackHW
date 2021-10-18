@@ -10,6 +10,7 @@ public class CalendarEventsPage extends BasePage {
     public WebElement option;
 
 
-
+    @FindBy(xpath = "//input[@type= 'number']")
+    public WebElement pageNumber;
 
 }
