@@ -25,6 +25,9 @@ public class Test1 extends TestBase {
         dashboardPage.navigateToModule("Activities", "Calendar Events");
 
         Assert.assertTrue(calendarEventsPage.option.isDisplayed(), "verify option link is displayed on the page");
+        calendarEventsPage.logOut();
+
+
 
     }
 
@@ -37,6 +40,9 @@ public class Test1 extends TestBase {
         String pageValue = calendarEventsPage.pageNumber.getAttribute("value");
 
         Assert.assertEquals(pageValue, "1", "verify page number equals to 1");
+
+        calendarEventsPage.logOut();
+
     }
 
     @Test
@@ -52,6 +58,7 @@ public class Test1 extends TestBase {
 
         Assert.assertEquals(viewPerPageValue, "25", "verify view per page is equal to 25");
 
+        calendarEventsPage.logOut();
     }
 
     @Test
@@ -68,6 +75,8 @@ public class Test1 extends TestBase {
         int expectedRow = Integer.parseInt(records[records.length-2]);
 
         Assert.assertEquals(actualRow, expectedRow, "verify row size equals to record");
+
+        calendarEventsPage.logOut();
     }
 
     @Test
@@ -81,6 +90,7 @@ public class Test1 extends TestBase {
         for (WebElement ch: calendarEventsPage.tableCheckboxes) {
             Assert.assertTrue(ch.isSelected());
         }
+        calendarEventsPage.logOut();
     }
 
     @Test
@@ -109,5 +119,7 @@ public class Test1 extends TestBase {
             actualTable.put(keyValue[0], keyValue[1]);
         }
         Assert.assertEquals(actualTable,expectedTable);
+
+        calendarEventsPage.logOut();
     }
 }

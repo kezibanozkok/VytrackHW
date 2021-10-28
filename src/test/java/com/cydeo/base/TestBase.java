@@ -1,5 +1,6 @@
 package com.cydeo.base;
 
+import com.cydeo.pages.DashboardPage;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
 import org.openqa.selenium.WebDriver;
@@ -28,7 +29,8 @@ public class TestBase {
     }
 
     @AfterMethod
-    public void tearDown() {
+    public void tearDown() throws InterruptedException {
+        Thread.sleep(3000);
         Driver.closeDriver();
     }
 }
