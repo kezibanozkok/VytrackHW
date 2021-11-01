@@ -27,8 +27,6 @@ public class Test1 extends TestBase {
         Assert.assertTrue(calendarEventsPage.option.isDisplayed(), "verify option link is displayed on the page");
         calendarEventsPage.logOut();
 
-
-
     }
 
     @Test

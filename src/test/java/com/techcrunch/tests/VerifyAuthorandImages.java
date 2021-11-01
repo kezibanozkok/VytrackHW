@@ -36,8 +36,10 @@ public class VerifyAuthorandImages extends TestBase {
         Assert.assertTrue(browserTitle.contains(pageTitle), "browser title and page title are NOT same");
 
 
-
-
+        for (WebElement link: articleDetailPage.links) {
+            System.out.println(link.getText());
+            Assert.assertTrue(link.isEnabled());
+        }
 
 
     }
