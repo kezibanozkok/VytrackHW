@@ -1,9 +1,7 @@
 package com.cydeo.tests;
 
 import com.cydeo.base.TestBase;
-import com.cydeo.pages.CalendarEventsPage;
 import com.cydeo.pages.DashboardPage;
-import com.cydeo.pages.LoginPage;
 import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.Test;
@@ -13,59 +11,31 @@ import java.util.Map;
 
 public class Test1 extends TestBase {
 
-    LoginPage loginPage = new LoginPage();
-    DashboardPage dashboardPage = new DashboardPage();
-    CalendarEventsPage calendarEventsPage = new CalendarEventsPage();
-
     @Test
     public void test1() {
 
-        loginPage.loginAsStoreManager();
-
-        dashboardPage.navigateToModule("Activities", "Calendar Events");
-
         Assert.assertTrue(calendarEventsPage.option.isDisplayed(), "verify option link is displayed on the page");
-        calendarEventsPage.logOut();
-
     }
 
     @Test
     public void test2() {
-        loginPage.loginAsStoreManager();
-
-        dashboardPage.navigateToModule("Activities", "Calendar Events");
 
         String pageValue = calendarEventsPage.pageNumber.getAttribute("value");
 
         Assert.assertEquals(pageValue, "1", "verify page number equals to 1");
-
-        calendarEventsPage.logOut();
-
     }
 
     @Test
     public void test3() {
-        loginPage.loginAsStoreManager();
-
-        dashboardPage.navigateToModule("Activities", "Calendar Events");
-
-        dashboardPage.waitUntilLoaderScreenDisappear();
 
         String viewPerPageValue = calendarEventsPage.viewPerPage.getAttribute("innerHTML").trim().substring(0,2);
         //System.out.println(viewPerPageValue);
 
         Assert.assertEquals(viewPerPageValue, "25", "verify view per page is equal to 25");
-
-        calendarEventsPage.logOut();
     }
 
     @Test
     public void test4() {
-        loginPage.loginAsStoreManager();
-
-        dashboardPage.navigateToModule("Activities", "Calendar Events");
-
-        dashboardPage.waitUntilLoaderScreenDisappear();
 
         String[] records = calendarEventsPage.numOfRecords.getText().split(" ");
 
@@ -73,31 +43,24 @@ public class Test1 extends TestBase {
         int expectedRow = Integer.parseInt(records[records.length-2]);
 
         Assert.assertEquals(actualRow, expectedRow, "verify row size equals to record");
-
-        calendarEventsPage.logOut();
     }
 
     @Test
     public void test5() {
-        loginPage.loginAsStoreManager();
-
-        dashboardPage.navigateToModule("Activities", "Calendar Events");
 
         calendarEventsPage.selectAllCheckbox.click();
 
         for (WebElement ch: calendarEventsPage.tableCheckboxes) {
             Assert.assertTrue(ch.isSelected());
         }
-        calendarEventsPage.logOut();
     }
 
     @Test
     public void test6() {
-        loginPage.loginAsStoreManager();
-
-        dashboardPage.navigateToModule("Activities", "Calendar Events");
 
         calendarEventsPage.testersMeeting.click();
+
+        dashboardPage.waitUntilLoaderScreenDisappear();
 
         Map<String, String> expectedTable = new LinkedHashMap<>();
         expectedTable.put("Title","Testers Meeting");
@@ -117,7 +80,5 @@ public class Test1 extends TestBase {
             actualTable.put(keyValue[0], keyValue[1]);
         }
         Assert.assertEquals(actualTable,expectedTable);
-
-        calendarEventsPage.logOut();
     }
 }

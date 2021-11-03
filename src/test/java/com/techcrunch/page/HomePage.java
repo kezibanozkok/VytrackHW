@@ -15,7 +15,6 @@ public class HomePage {
     @FindBy(css = ".river.river--homepage article img")
     public List<WebElement> images;
 
-
     @FindBy(css = ".river.river--homepage header[class='post-block__header']")
     public List<WebElement> titles;
 

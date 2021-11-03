@@ -1,6 +1,8 @@
 package com.cydeo.base;
 
+import com.cydeo.pages.CalendarEventsPage;
 import com.cydeo.pages.DashboardPage;
+import com.cydeo.pages.LoginPage;
 import com.cydeo.utilities.ConfigurationReader;
 import com.cydeo.utilities.Driver;
 import org.openqa.selenium.WebDriver;
@@ -16,21 +18,35 @@ public class TestBase {
     protected WebDriver driver;
     protected Actions actions;
     protected WebDriverWait wait;
+    protected LoginPage loginPage;
+    protected DashboardPage dashboardPage;
+    protected CalendarEventsPage calendarEventsPage;
+
 
     @BeforeMethod
     public void setUp(){
-
         driver = Driver.get();
         driver.manage().window().maximize();
         driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
         actions = new Actions(driver);
         wait = new WebDriverWait(driver,10);
         driver.get(ConfigurationReader.get("url"));
+
+        loginPage = new LoginPage();
+        loginPage.loginAsStoreManager();
+
+        dashboardPage = new DashboardPage();
+        dashboardPage.navigateToModule("Activities", "Calendar Events");
+        dashboardPage.waitUntilLoaderScreenDisappear();
+
+        calendarEventsPage = new CalendarEventsPage();
+
     }
 
     @AfterMethod
-    public void tearDown() throws InterruptedException {
-        Thread.sleep(3000);
+    public void tearDown() {
+
+        calendarEventsPage.logOut();
         Driver.closeDriver();
     }
 }
